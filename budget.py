@@ -44,7 +44,10 @@ creds_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
 creds_file = os.getenv("GOOGLE_CREDS_FILE", str(script_dir / "suss-435307-621fd9e04900.json"))
 
 if creds_json:
-    credentials = ServiceAccountCredentials.from_json_keyfile_dict(json.loads(creds_json), SCOPE)
+    parsed_creds = json.loads(creds_json)
+    if isinstance(parsed_creds, str):
+        parsed_creds = json.loads(parsed_creds)
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(parsed_creds, SCOPE)
 else:
     credentials = ServiceAccountCredentials.from_json_keyfile_name(creds_file, SCOPE)
 
