@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 script_dir = Path(__file__).resolve().parent
 load_dotenv(dotenv_path=script_dir / ".env")
 
-allowed_user_ids = os.getenv("ALLOWED_USER_IDS", "41645481,188171287")
+allowed_user_ids = os.getenv("ALLOWED_USER_IDS")
 ALLOWED_USER_IDS = [int(user_id) for user_id in allowed_user_ids.split(",") if user_id.strip()]
 
 def check_authorized_user(func):
